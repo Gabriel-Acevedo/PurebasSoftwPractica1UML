@@ -1,0 +1,88 @@
+@startuml
+
+title Damas MVC(Paquete Damas.models) - Class Diagram
+
+Package damas.models{
+    class Game{
+        -results: List<Result>
+        -turn: String
+        #whiteTokens List<WhiteTokens>: WhiteToken
+        #blackTokens List<BlackTokens>: BlackToken
+        +Game()
+        +clear(): void
+        +addNewMoveWT(Map<TokenNumber,PositionX,PositionY>)
+        +addNewMoveBT(Map<TokenNumber,PositionX,PositionY>)
+        +getTurn(): String
+        +isWinner(): boolean
+        +isLooser(): boolean
+        +getWhiteKills(): int
+        +getBlackKills(): int
+    }
+    class Token{
+        -{static}TotalTokens: int
+        #tokenPosition Map<TokenNumber,PositionX,PositionY>
+        #Token()
+        +getTotalTokens(): int
+    }
+    enum PositionX{
+        +{static} posX1
+        +{static} posX2
+        +{static} posX3
+        +{static} posX4
+        +{static} posX5
+        +valueOf(String): int
+        ~length(): int
+    }
+    enum PositionY{
+        +{static} posY1
+        +{static} posY2
+        +{static} posY3
+        +{static} posY4
+        +{static} posY5
+        +valueOf(String): int
+        ~length(): int
+    }
+    class WhiteToken{
+        +WhiteToken()
+        +getWhiteToken(int TokenNumber): int
+        ~getResult(BlackToken): Result
+    }
+    class BlackToken{
+        +BlackToken()
+        +getBlackToken(int TokenNumber): int
+        ~isKill(Token): boolean
+        ~isQueen(Token): boolean
+    }
+    class Result{
+        -whiteKills: int
+        -blackKills: int
+        ~Result(int, int)
+        ~isWinner()
+        ~getWhiteKills(): int
+        ~getBlackKills(): int
+    }
+}
+
+Package java.util{
+    class List{
+    }
+    class HashMap{
+    }
+    class Map{
+    }
+}
+
+Token *-left-> HashMap
+Token *-left-> Map
+Token <|-down- WhiteToken
+Token <|-down- BlackToken
+Token *--> PositionX
+Token *--> PositionY
+Game *--> WhiteToken
+Game *--> BlackToken
+Game *--> Result
+Game *--> List
+WhiteToken ..> BlackToken
+WhiteToken ..> Result
+
+@enduml

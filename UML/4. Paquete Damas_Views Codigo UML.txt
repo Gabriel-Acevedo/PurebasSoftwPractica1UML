@@ -1,0 +1,48 @@
+4) Pckage Damas.views:
+
+@startuml
+
+title Damas MVC(Paquete Damas.views) - Class Diagram
+
+Package damas.views{
+    class View{
+        +View()
+        +interact(Controller): void
+    }
+    enum Error{
+        +{static} WRONG_TOKEN_NUMBER: Error
+        +{static} WRONG_POSITION: Error
+        +{static} WRONG_CARACTER: Error
+        -meessage: String
+        -Error(String)
+        +getError(): String
+    }
+    enum Message{
+        +{static} TITLE: Message
+        +{static} TURN: Message
+        +{static} MOVE_TOKEN: Message
+        +{static} IS_KILL: Message
+        +{static} IS_QUEEN: MEssage
+        +{static} RESUME: Message
+        +{static} WINNER: Message
+        +{static} LOOSER: Message
+        -message: String
+        -Message(String)
+        +getMessage(): String
+    }
+}
+
+Package damas.controllers{
+    class StartController{
+    }
+    class MoveController{
+    }
+    class ResumeController{
+    }
+}
+
+View ..> StartController
+View ..> MoveController
+View ..> ResumeController
+
+@enduml

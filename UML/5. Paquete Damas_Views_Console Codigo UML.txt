@@ -1,0 +1,89 @@
+@startuml
+
+title Damas MVC(Paquete Damas.views.console) - Class Diagram
+
+Package damas.utils{
+    class WithConsoleView{
+    }
+}
+
+Package damas.views{
+    class View{
+    }
+    enum Message{
+    }
+    enum Error{
+    }
+}
+
+Package damas.views.console{
+    class ConsoleView{
+        -startView: StartView
+        -moveView: MoveView
+        -resumeView: ResumeView
+        +ConsoleView(StartController,MoveController,ResumeController)
+        #start(): void
+        #move(): boolean
+        #resume(): boolean
+    }
+    class StartView{
+       ~StartView()
+       ~interact(StartController): void
+    }
+    class MoveView{
+        ~MoveView()
+        ~interact(MoveView): boolean
+    }
+    class ResumeView{
+        ~ResumeView()
+        ~interact(ResumeController)
+    }
+    class BoardView{
+        -moveController: MoveController
+        ~BoardView(MoveController)
+        ~writeln(int): void
+        ~read(int): void
+    }
+    class ResultView{
+        ~ResultView()
+        ~writeln(int[]): void
+    }
+    class MessageView{
+        ~MessageView()
+        ~wirteln(): void
+    }
+    class ErrorView{
+        ~ErrorView()
+        ~wirteln(): void
+    }
+
+}
+
+
+Package damas.controllers{
+    class StartController{
+    }
+    class MoveController{
+    }
+    class ResumeController{
+    }
+}
+
+View <|-down- ConsoleView
+WithConsoleView <|-down- StartView
+WithConsoleView <|-down- MoveView
+WithConsoleView <|-down- BoardView
+WithConsoleView <|-down- ResultView
+ConsoleView *--> StartView
+ConsoleView *--> MoveView
+ConsoleView *--> ResumeView
+StartView --> StartController
+MoveView --> MoveController
+ResumeView --> ResumeController
+MoveView *--> BoardView
+MoveView *--> ResultView
+MessageView *-up-> Message
+ErrorView *-up-> Error
+
+
+@enduml

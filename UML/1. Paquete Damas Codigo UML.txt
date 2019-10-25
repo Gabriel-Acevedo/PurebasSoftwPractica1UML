@@ -1,0 +1,47 @@
+1) Paquete Damas:
+
+@startuml
+title Damas MVC(Paquete Damas) - Class Diagram
+
+package damas {
+    abstract class Damas{
+        -game: Game
+        -startController: StartController
+        -moveController: MoveController
+        -resumeController: ResumeController
+        -view: View
+        #Damas()
+        #{abstract} createView(StartController,MoveController,ResumeController): View
+        #play(): void
+    }
+    class ConsoleDamas{
+        +ConsoleDamas()
+        +{static} main(String[]): void
+        #createView(StartController,MoveController,ResumeController): View
+    }
+}
+package damas.models {
+    class Game{
+    }
+}
+package damas.controllers {
+    class StartController{
+    }
+    class MoveController{
+    }
+    class ResumeController{
+    }
+}
+package damas.views {
+    class View{
+    }
+}
+
+Damas <|-down- ConsoleDamas
+Damas *-down-> Game
+Damas --> View
+Damas --> StartController
+Damas --> MoveController
+Damas --> ResumeController
+
+@enduml
